@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Write Form</h1>
+  <form id="form">
+    <input type="text" id="name">
+    <button type="submit">전송</button>
+  </form>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+      document.getElementById('form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const name = e.target.name.value;
+          if (!name) {
+              return alert('이름을 입력하세요');
+          }
+          try {
+              await axios.post('/write', { name });
+              alert('요청 성공');
+          } catch (err) {
+              console.error(err);
+          }
+          e.target.name.value = '';
+      });
+  </script>
+</body>
+</html>
